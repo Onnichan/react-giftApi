@@ -1,17 +1,44 @@
-import React from 'react';
+import React,{ Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+//components
+import {AddCategory} from "./components/AddCategory";
+import { GifGrid } from "./components/GifGrid";
+
+const GiftExpertApp = ()=>{
+
+  // const categories = ['One Punch','Samurai X','Dragon ball'];
+
+  const [categories, setCategories] = useState(['One Punch']);
+
+  // const handleAdd = ()=> {
+  //   setCategories([...categories,'HunterxHunter']);
+
+  // }
+   
+  return(
+    <Fragment>
+      <h2>GiftExpertApp</h2>
+      <AddCategory setCategories={ setCategories }/>
+      <hr/>
+
+      {/* <button onClick={handleAdd}> Agregar </button> */}
+      <ul>
+        {
+          categories.map( category => 
+            // <li key={category}>{category}</li>
+            <GifGrid category={ category } key={ category }/> 
+          )
+        }
+      </ul>
+    </Fragment>
+  )
+}
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <GiftExpertApp />,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
